@@ -15,4 +15,8 @@ RUN mkdir -p /opt/minecraft \
     --location "${MINECRAFT_RELEASE_URL}" \
     --output /opt/minecraft/server.jar
 
+WORKDIR /data
+VOLUME /data
 
+RUN echo eula=true > /data/eula.txt
+COPY server.properties /data/
