@@ -8,15 +8,19 @@ RUN apk add --no-cache \
     curl \
     openjdk8-jre-base
 
-RUN mkdir -p /opt/minecraft \
+RUN mkdir -p /data/minecraft \
   && curl \
     --silent \
     --show-error \
     --location "${MINECRAFT_RELEASE_URL}" \
-    --output /opt/minecraft/server.jar
+    --output /data/minecraft/server.jar
 
-WORKDIR /data
-VOLUME /data
+WORKDIR /data/minecraft
 
-RUN echo eula=true > /data/eula.txt
-COPY server.properties /data/
+RUN echo eula=true > /data/minecraft/eula.txt
+COPY server.properties /data/minecraft/server.properties
+
+VOLUME ["/data/minecraft/world", "/data/minecraft/logs"]
+
+ENTRYPOINT ["/usr/bin/java"]
+CMD ["-Xmx2048M", "-Xms1024M", "-XX:+UseConcMarkSweepGC", "-jar", "server.jar"]
