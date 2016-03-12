@@ -6,11 +6,13 @@ ENV MINECRAFT_RELEASE_URL "https://s3.amazonaws.com/Minecraft.Download/versions/
 
 RUN apk add --no-cache \
     curl \
-    openjdk7-jre
+    openjdk8-jre-base
 
-RUN curl \
+RUN mkdir -p /opt/minecraft \
+  && curl \
     --silent \
     --show-error \
     --location "${MINECRAFT_RELEASE_URL}" \
-    --output /tmp/minecraft_server.${MINECRAFT_VERSION}.jar \
+    --output /opt/minecraft/server.jar
+
 
