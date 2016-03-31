@@ -15,7 +15,7 @@ RUN mkdir -p /data/minecraft \
     --location "${MINECRAFT_RELEASE_URL}" \
     --output /data/minecraft/server.jar
 
-WORKDIR /data/minecraft
+WORKDIR /data/minecraft/server
 
 ENTRYPOINT ["/usr/bin/java"]
-CMD ["-Xmx2048M", "-Xms1024M", "-XX:+UseConcMarkSweepGC", "-jar", "server.jar"]
+CMD ["-Xmx2048M", "-Xms1024M", "-XX:+UseConcMarkSweepGC", "-jar", "/data/minecraft/server.jar"]
