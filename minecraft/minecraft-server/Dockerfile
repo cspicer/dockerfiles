@@ -17,10 +17,5 @@ RUN mkdir -p /data/minecraft \
 
 WORKDIR /data/minecraft
 
-RUN echo eula=true > /data/minecraft/eula.txt
-COPY server.properties /data/minecraft/server.properties
-
-VOLUME ["/data/minecraft/world", "/data/minecraft/logs"]
-
 ENTRYPOINT ["/usr/bin/java"]
 CMD ["-Xmx2048M", "-Xms1024M", "-XX:+UseConcMarkSweepGC", "-jar", "server.jar"]
