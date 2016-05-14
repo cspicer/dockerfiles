@@ -1,10 +1,13 @@
 FROM cspicer/lua:5.1
 
 ENV OPENRESTY_VERSION 1.9.7.3
-ENV ARCHIVE_URL http://openresty.org/download/openresty-${OPENRESTY_VERSION}.tar.gz
+ENV OPENRESTY_ARCHIVE_URL http://openresty.org/download/openresty-${OPENRESTY_VERSION}.tar.gz
+
 ENV OPENRESTY_PREFIX /opt/openresty
 ENV NGINX_PREFIX /opt/openresty/nginx
 ENV VAR_PREFIX /var/nginx
+
+ENV SOURCE_DIR /usr/local/src
 
 RUN apk add --no-cache \
     curl \
@@ -15,9 +18,10 @@ RUN apk add --no-cache \
     libssl1.0 \
     pcre \ 
     libgcc \
-    libstdc++ \
-  && apk add --no-cache --virtual \
-    build-deps \
+    libstdc++
+
+RUN apk add --no-cache --virtual build-deps \
+    tar \
     make \
     gcc \
     musl-dev \
@@ -27,8 +31,15 @@ RUN apk add --no-cache \
     ncurses-dev \
     readline-dev \
     perl \
-  && curl -sSL ${ARCHIVE_URL} | tar -zxC /tmp \
-  && cd /tmp/openresty-${OPENRESTY_VERSION} \
+  && curl \
+    --silent \
+    --show-error \
+    --create-dirs \
+    --location ${OPENRESTY_ARCHIVE_URL} \
+    --output /tmp/openresty.tar.gz \
+  && mkdir -p ${SOURCE_DIR} \
+  && tar -C ${SOURCE_DIR} -zxf /tmp/openresty.tar.gz \
+  && cd ${SOURCE_DIR}/openresty-${OPENRESTY_VERSION} \
   && readonly BUILDERS=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
   && ./configure \
     --prefix=$OPENRESTY_PREFIX \
@@ -58,8 +69,9 @@ RUN ln -sf $NGINX_PREFIX/sbin/nginx /usr/local/bin/nginx \
   && ln -sf $NGINX_PREFIX/sbin/nginx /usr/local/bin/openresty \
   && ln -sf $OPENRESTY_PREFIX/bin/resty /usr/local/bin/resty \
   && ln -sf $OPENRESTY_PREFIX/luajit/bin/luajit-* $OPENRESTY_PREFIX/luajit/bin/lua \
-  && ln -sf $OPENRESTY_PREFIX/luajit/bin/luajit-* /usr/local/bin/lua \
+  && ln -sf $OPENRESTY_PREFIX/luajit/bin/luajit-* /usr/local/bin/lua
 
-WORKDIR $NGINX_PREFIX/
-CMD ["nginx", "-g", "daemon off; error_log /dev/stderr info;"]
+WORKDIR $NGINX_PREFIX
+ENTRYPOINT ["nginx"]
+CMD ["-g", "daemon off; error_log /dev/stderr info;"]
 
