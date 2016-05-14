@@ -3,8 +3,7 @@ FROM cspicer/openresty:1.9.7.3
 ENV LAPIS_OPENRESTY "/opt/openresty/nginx/sbin/nginx"
 ENV LAPIS_ENVIRONMENT "development"
 
-RUN apk add --no-cache --virtual \
-    build-deps \
+RUN apk add --no-cache --virtual build-deps \
     git \
     gcc \
     musl-dev \
