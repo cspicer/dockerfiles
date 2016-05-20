@@ -5,6 +5,8 @@ ENV LIVETAIL_VERSION 1.0
 ENV LIVETAIL_RELEASE_URL https://github.com/SumoLogic/livetail-cli/releases/download/v${LIVETAIL_VERSION}/livetail_linux.zip
 ENV GLIBC_VERSION 2.23-r1
 ENV GLIBC_RELEASE_URL https://github.com/andyshinn/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}
+ENV GLIBC_KEY_URL https://raw.githubusercontent.com/andyshinn/alpine-pkg-glibc/master/andyshinn.rsa.pub
+ENV GLIBC_KEY_PATH /etc/apk/keys/andyshinn.rsa.pub
 
 RUN apk add --no-cache \
     ca-certificates \
@@ -15,6 +17,11 @@ RUN apk add --no-cache \
 RUN curl \
     --silent \
     --show-error \
+    --location ${GLIBC_KEY_URL} \
+    --output ${GLIBC_KEY_PATH} \
+  && curl \
+    --silent \
+    --show-error \
     --location "${GLIBC_RELEASE_URL}/glibc-${GLIBC_VERSION}.apk" \
     --output /tmp/glibc-${GLIBC_VERSION}.apk \
   && curl \
@@ -22,10 +29,11 @@ RUN curl \
     --show-error \
     --location "${GLIBC_RELEASE_URL}/glibc-bin-${GLIBC_VERSION}.apk" \
     --output /tmp/glibc-bin-${GLIBC_VERSION}.apk \
-  && apk add --no-cache --allow-untrusted \
+  && apk add --no-cache \
     /tmp/glibc-${GLIBC_VERSION}.apk \
     /tmp/glibc-bin-${GLIBC_VERSION}.apk \
-  && rm -rf /tmp/glibc*
+  && rm -rf /tmp/glibc* \
+  && rm ${GLIBC_KEY_PATH}
 
 RUN curl \
     --silent \
