@@ -7,6 +7,8 @@ ENV NOMAD_ARCHIVE_SHA256SUM 710ff3515bc449bc2a06652464f4af55f1b76f63c77a9048bc30
 
 ENV GLIBC_VERSION 2.23-r1
 ENV GLIBC_RELEASE_URL https://github.com/andyshinn/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}
+ENV GLIBC_KEY_URL https://raw.githubusercontent.com/andyshinn/alpine-pkg-glibc/master/andyshinn.rsa.pub
+ENV GLIBC_KEY_PATH /etc/apk/keys/andyshinn.rsa.pub
 
 RUN apk add --no-cache  \
     curl \
@@ -15,6 +17,11 @@ RUN apk add --no-cache  \
     libgcc
 
 RUN curl \
+    --silent \
+    --show-error \
+    --location ${GLIBC_KEY_URL} \
+    --output ${GLIBC_KEY_PATH} \
+  && curl \
     --silent \
     --show-error \
     --location "${GLIBC_RELEASE_URL}/glibc-${GLIBC_VERSION}.apk" \
@@ -27,7 +34,8 @@ RUN curl \
   && apk add --no-cache --allow-untrusted \
     /tmp/glibc-${GLIBC_VERSION}.apk \
     /tmp/glibc-bin-${GLIBC_VERSION}.apk \
-  && rm -rf /tmp/glibc*
+  && rm -rf /tmp/glibc* \
+  && rm ${GLIBC_KEY_PATH}
 
 RUN curl \
     --silent \
