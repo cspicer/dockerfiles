@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 RUN apk add --update \
     bash \

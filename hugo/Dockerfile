@@ -1,5 +1,5 @@
 FROM alpine:3.3
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV HUGO_VERSION 0.15
 ENV HUGO_ARCHIVE_URL https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux_amd64.tar.gz

@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV MINECRAFT_VERSION 1.9.4
 ENV MINECRAFT_RELEASE_URL "https://s3.amazonaws.com/Minecraft.Download/versions/${MINECRAFT_VERSION}/minecraft_server.${MINECRAFT_VERSION}.jar"

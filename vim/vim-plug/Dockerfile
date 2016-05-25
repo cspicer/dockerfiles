@@ -1,5 +1,5 @@
 FROM cspicer/vim:base
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV VIM_PLUG_URL "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 

@@ -1,5 +1,5 @@
 FROM debian:latest
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV DEBIAN_FRONTEND noninteractive
 

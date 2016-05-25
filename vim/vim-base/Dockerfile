@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV TERM screen-256color
 

@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV NOMAD_VERSION 0.3.2
 ENV NOMAD_ARCHIVE_URL https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip

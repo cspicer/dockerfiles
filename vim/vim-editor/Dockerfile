@@ -1,5 +1,5 @@
 FROM cspicer/vim:vim-plug
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV TERM screen-256color
 ENV VIMRC_URL "https://raw.githubusercontent.com/cspicer/dotfiles/master/vim/.vimrc"

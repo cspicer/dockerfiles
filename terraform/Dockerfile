@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV TERRAFORM_VERSION 0.6.15
 ENV TERRAFORM_RELEASE_URL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip

@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV CLIENT_VERSION 1.9.2
 ENV VERSION_MANIFEST_URL https://launchermeta.mojang.com/mc/game/version_manifest.json

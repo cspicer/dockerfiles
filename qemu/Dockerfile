@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV APP_NAME qemu
 ENV APP_VERSION 2.4.1

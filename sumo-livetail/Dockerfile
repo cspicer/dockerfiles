@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Chris Spicer <github@cspicer.ca>
+MAINTAINER Chris Spicer <git@cspicer.net>
 
 ENV LIVETAIL_VERSION 1.0
 ENV LIVETAIL_RELEASE_URL https://github.com/SumoLogic/livetail-cli/releases/download/v${LIVETAIL_VERSION}/livetail_linux.zip
