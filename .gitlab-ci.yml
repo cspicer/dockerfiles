@@ -3,8 +3,9 @@ stages:
   - deploy
 
 github_mirror:
-  image: axeclbr/git:latest
+  image: alpine:latest
   stage: deploy
   script:
+    - apk add --no-cache git openssh-client
     - git push --prune --mirror git@github.com:cspicer/dockerfiles.git
 
