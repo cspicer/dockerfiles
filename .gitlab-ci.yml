@@ -1,0 +1,9 @@
+---
+stages:
+  - deploy
+
+github_mirror:
+  stage: deploy
+  script:
+    - git push --prune --mirror git@github.com:cspicer/dockerfiles.git
+
