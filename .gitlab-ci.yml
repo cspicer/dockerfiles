@@ -3,6 +3,7 @@ stages:
   - deploy
 
 github_mirror:
+  image: axeclbr/git:latest
   stage: deploy
   script:
     - git push --prune --mirror git@github.com:cspicer/dockerfiles.git
